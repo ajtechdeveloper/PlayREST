@@ -19,10 +19,10 @@ public class EmployeeController extends Controller {
 
     public Result create() {
         JsonNode json = request().body().asJson();
-        logger.debug("In EmployeeController.create(), input is: {}", json.toString());
         if (json == null) {
-            return badRequest(ApplicationUtil.createResponse("Expecting Json data", false));
+            return badRequest(ApplicationUtil.createResponse("Expecting JSON data", false));
         }
+        logger.debug("In EmployeeController.create(), input is: {}", json.toString());
         Employee employee = EmployeeService.getInstance().addEmployee(Json.fromJson(json, Employee.class));
         JsonNode jsonObject = Json.toJson(employee);
         return created(ApplicationUtil.createResponse(jsonObject, true));
